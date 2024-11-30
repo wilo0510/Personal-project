@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --primary-color:#a65f84;
+  --secondary-color:#953C681A;
+}
+
+body {
+  background-color: var(--primary-color) !important;
+}
+#__next{
+  height: 100%;
+}
+.background-specific{
+  background-color: var(--secondary-color);
+}
