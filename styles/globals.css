@@ -1,18 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700&display=swap');
+
 
 :root{
-  --primary-color:#a65f84;
-  --secondary-color:#953C681A;
+  --primary-color:#FF6F3C;
+  --secondary-color:#FF6F3C1A;
 }
 
 body {
   background-color: var(--primary-color) !important;
+  font-family: 'Mulish', sans-serif;
 }
 #__next{
   height: 100%;
 }
 .background-specific{
   background-color: var(--secondary-color);
+}
+.mainButton{
+  background-color: var(--primary-color);
 }
