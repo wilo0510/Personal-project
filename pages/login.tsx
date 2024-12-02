@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
+import { useRouter } from 'next/router';
 
 const Login: React.FC = () => {
+  const router = useRouter();
   const [email, setEmail]= useState('');
   const [password, setPassword]= useState('');
   const [error,setError]=useState<string |null>(null);
@@ -20,7 +22,6 @@ const Login: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
     try {
       const response = await fetch('http://localhost:3000/api/login', {
         method: 'POST',
@@ -34,18 +35,22 @@ const Login: React.FC = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to log in');
+        const errorData = await response.json();
+        throw new Error(errorData.message);
       }
 
       const data = await response.json();
       // Handle the response, such as redirecting or storing tokens in state
       console.log('Login successful', data);
-
+      localStorage.setItem('authToken', data.token);
+      router.push('/dashboard');
       // Reset form
       setEmail('');
       setPassword('');
-    } catch (error) {
-      setError('Invalid email or password');
+    } catch (err) {
+      const errorMessage= err instanceof Error ? err.message: 'Unknown error ocurred';
+      console.log(errorMessage);
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
