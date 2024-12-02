@@ -40,11 +40,7 @@ const Login: React.FC = () => {
       }
 
       const data = await response.json();
-      // Handle the response, such as redirecting or storing tokens in state
-      console.log('Login successful', data);
-      localStorage.setItem('authToken', data.token);
       router.push('/dashboard');
-      // Reset form
       setEmail('');
       setPassword('');
     } catch (err) {

@@ -32,8 +32,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET!, {
       expiresIn: "1h",
     });
+    res.setHeader('Set-Cookie', `authToken=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=3600`);
 
-    res.status(200).json({ token });
+    return res.status(200).json({ message: "Login successful" });
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ error: "Internal server error" });

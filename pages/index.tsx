@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const {req} = context;
   const token = req.cookies.token;
+  console.log(token);
   try{
     if(token){
       const secret = process.env.JWT_SECRET;
